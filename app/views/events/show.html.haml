@@ -36,6 +36,7 @@
               %button.close{ type: "button", "data-dismiss": "modal" } &times;
             = form_with(modal: @event.tickets.build, url: event_tickets_path(@event)) do |f|
               .modal-body
+                = p new_event_ticket_path(@event)
                 #createTicketErrors
                 = f.text_field :comment, class: "form-control"
               .modal-footer
