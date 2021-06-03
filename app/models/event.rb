@@ -1,4 +1,7 @@
 class Event < ApplicationRecord
+  # event.owner.name でownerの情報を参照できるようになる
+  belongs_to :owner, class_name: "User"
+
   validates :name, length: { maximum: 50}, presence: true
   validates :place, length: { maximum: 100}, presence: true
   validates :content, length: { maximum: 2000}, presence: true
