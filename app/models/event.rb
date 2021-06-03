@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  has_many :tickets
+  has_many :tickets, dependent: :destroy
   # event.owner.name でownerの情報を参照できるようになる
   belongs_to :owner, class_name: "User"
 
