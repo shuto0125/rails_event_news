@@ -1,4 +1,5 @@
 class Event < ApplicationRecord
+  has_many :tickets
   # event.owner.name でownerの情報を参照できるようになる
   belongs_to :owner, class_name: "User"
 
