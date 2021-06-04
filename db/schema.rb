@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_04_073551) do
+ActiveRecord::Schema.define(version: 2021_06_04_110442) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -44,12 +44,11 @@ ActiveRecord::Schema.define(version: 2021_06_04_073551) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.bigint "owner_id"
+    t.integer "owner_id"
     t.string "name", null: false
     t.string "place", null: false
     t.datetime "start_at", null: false
     t.datetime "end_at", null: false
-    t.text "content", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["owner_id"], name: "index_events_on_owner_id"
