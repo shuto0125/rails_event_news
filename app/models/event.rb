@@ -1,7 +1,10 @@
 class Event < ApplicationRecord
+  has_one_attached :image, dependent: false  #ActiveStorage の image 属性が使えるように
   has_many :tickets, dependent: :destroy
   # event.owner.name でownerの情報を参照できるようになる
   belongs_to :owner, class_name: "User"
+
+  validates :image, content_type: [:png, :jpg, :jpeg], size: { less_than_or_equal_to: 10.megabytes }, dimension: { width: { max: 2000 } , height: { max: 2000 } }
 
   validates :name, length: { maximum: 50}, presence: true
   validates :place, length: { maximum: 100}, presence: true
@@ -15,7 +18,15 @@ class Event < ApplicationRecord
     owner_id == user.id
   end
 
+  attr_accessor :remove_image
+
+  before_save :remove_image_if_user_accept
+
   private
+
+  def remove_image_if_user_accept
+    self.image = nil if ActiveRecord::Type::Boolean.new.cast(remove_image)
+  end
 
   def start_at_should_be_before_end_at
     return unless start_at && end_at
