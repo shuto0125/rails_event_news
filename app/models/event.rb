@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  has_one_attached :image, dependent: false  #activestorage の image 属性が使えるように
+  has_one_attached :image, dependent: false  #ActiveStorage の image 属性が使えるように
   has_many :tickets, dependent: :destroy
   # event.owner.name でownerの情報を参照できるようになる
   belongs_to :owner, class_name: "User"
