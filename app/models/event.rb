@@ -1,4 +1,5 @@
 class Event < ApplicationRecord
+  has_one_attached :image, dependent: false  #activestorage の image 属性が使えるように
   has_many :tickets, dependent: :destroy
   # event.owner.name でownerの情報を参照できるようになる
   belongs_to :owner, class_name: "User"
@@ -15,7 +16,15 @@ class Event < ApplicationRecord
     owner_id == user.id
   end
 
+  attr_accessor :remove_image
+
+  before_save :remove_image_if_user_accept
+
   private
+
+  def remove_image_if_user_accept
+    self.image = nil if ActiveRecord::Type::Boolean.new.cast(remove_image)
+  end
 
   def start_at_should_be_before_end_at
     return unless start_at && end_at
