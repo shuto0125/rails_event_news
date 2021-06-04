@@ -4,6 +4,8 @@ class Event < ApplicationRecord
   # event.owner.name でownerの情報を参照できるようになる
   belongs_to :owner, class_name: "User"
 
+  validates :image, content_type: [:png, :jpg, :jpeg], size: { less_than_or_equal_to: 10.megabytes }, dimension: { width: { max: 2000 } , height: { max: 2000 } }
+
   validates :name, length: { maximum: 50}, presence: true
   validates :place, length: { maximum: 100}, presence: true
   validates :content, length: { maximum: 2000}, presence: true

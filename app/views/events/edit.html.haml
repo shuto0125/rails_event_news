@@ -26,10 +26,10 @@
       - if @event.image.attached? && @event.image.blob&.persisted?
         = image_tag( @event.image.variant(resize_to_fit: [200,200]), class: "img-thumbnail d-block mb-3")
       = f.file_field :image, class: "form-control-file"
-    - if @event.image.attached?
+    - if @event.image.attached? && @event.image.blob&.persisted?
       .checkbox
         %label
           = f.check_box :remove_image
+          画像を削除する
 
-      = f.text_area :image, class: "form-control", row: 10
     = f.submit class: "btn btn-primary"
