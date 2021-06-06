@@ -7,7 +7,8 @@
     .card.mb-2
       %h5.card-header イベント内容
       .card-body
-        %p.card-text= @event.content
+        -# "="のままだとエスケープされてしまうので、 "!="に変更
+        %p.card-text!= @event.content
     .card.mb-2
       %h5.card-header 開催時間
       .card-body

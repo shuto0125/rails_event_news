@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_04_051357) do
+ActiveRecord::Schema.define(version: 2021_06_04_110442) do
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.integer "record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -34,12 +44,11 @@ ActiveRecord::Schema.define(version: 2021_06_04_051357) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.bigint "owner_id"
+    t.integer "owner_id"
     t.string "name", null: false
     t.string "place", null: false
     t.datetime "start_at", null: false
     t.datetime "end_at", null: false
-    t.text "content", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["owner_id"], name: "index_events_on_owner_id"
