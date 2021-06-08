@@ -19,6 +19,9 @@
       %div
         = f.datetime_select :end_at, start_year: now.year, end_year: now.year + 1
     .form-group
+      = f.label :tag_names
+      = f.text_field  @event.tags, placeholder:",で区切ってください"
+    .form-group
       = f.label :content
       = f.rich_text_area :content
     .form-group
