@@ -10,7 +10,16 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = current_user.created_events.build(event_params)
+    # create_events.build を使いたいが、userとtagの結びつけ方が不明のため一旦スルー
+    # @event = current_user.created_events.build(event_params)
+
+    # create_events.build をスルーするための代わりのコード
+    @event = Event.new(event_params)
+    @event.owner_id = current_user.id;
+
+    tag_list = params[:event][:tag_names].split(",")
+  
+    @event.tags_save(tag_list)
 
     if @event.save
       redirect_to @event, notice: "作成しました"
@@ -38,7 +47,7 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(
-      :name, :place, :image, :remove_image, :content, :start_at, :end_at
+      :name, :place, :image, :remove_image, :content, :start_at, :end_at, :tag_name
     )
   end
 end

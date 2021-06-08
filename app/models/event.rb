@@ -6,7 +6,7 @@ class Event < ApplicationRecord
   belongs_to :owner, class_name: "User"
 
   has_many :event_tags
-  has_many :tags, through: :event_tags, source: :tag
+  has_many :tags, through: :event_tags
 
   validates :image, content_type: [:png, :jpg, :jpeg], size: { less_than_or_equal_to: 10.megabytes }, dimension: { width: { max: 2000 } , height: { max: 2000 } }
 
@@ -20,6 +20,17 @@ class Event < ApplicationRecord
   def created_by?(user)
     return false unless user
     owner_id == user.id
+  end
+
+  def tags_save(tag_list)
+    if self.tags != nil
+      event_tags_records = EventTag.where(event_id: self.id)
+      event_tags_records.destroy_all
+    end
+    tag_list.each do |tag|
+      inspected_tag = Tag.where(tag_name: tag).first_or_create
+      self.tags << inspected_tag
+    end
   end
 
   attr_accessor :remove_image
