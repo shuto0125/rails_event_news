@@ -4,6 +4,16 @@
     .card.mb-2
       -if @event.image.attached?
         = image_tag @event.image, class: "card-img-top"
+
+    .card.mb-2
+      %h5.card-header  タグ
+      %p.card-body
+        -# - @event.tags.each do |tag|
+        -#   %span
+        -#     = "#{tag.tag_name},"
+        - @event.tags.map do |tag|
+          %button{class: 'btn btn-secondary btn-sm'}
+            = "#{tag.tag_name.strip}"
     .card.mb-2
       %h5.card-header イベント内容
       .card-body

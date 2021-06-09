@@ -19,6 +19,12 @@
       %div
         = f.datetime_select :end_at, start_year: now.year, end_year: now.year + 1
     .form-group
+      = f.label :tag_names
+      -# strip! で空白を削除
+      -# https://www.javadrive.jp/ruby/string_class/index11.html
+      - tags_array = @event.tags.map{|tag| "#{tag.tag_name.strip}," }
+      = f.text_field :tag_names, value: tags_array, placeholder:",で区切ってください", class: "form-control"
+    .form-group
       = f.label :content
       = f.rich_text_area :content
     .form-group
