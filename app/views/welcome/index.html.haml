@@ -1,6 +1,6 @@
 %h1.mt-3.mb-3 イベント一覧
 
-%ul.list-group
+%ul.list-group.mb-3
   - @events.each do |event|
     = link_to(event, class: "list-group-item list-group-item-action") do
       %h5.list-group-item-heading= event.name
@@ -10,3 +10,5 @@
           - event.tags.map do |tag|
             %button{class: 'btn btn-secondary btn-sm'}
               = "#{tag.tag_name.strip}"
+
+= paginate @events
