@@ -19,7 +19,7 @@ class EventsController < ApplicationController
     @event.owner_id = current_user.id;
 
     tag_list = params[:event][:tag_names].split(",")
-  
+
     @event.tags_save(tag_list)
 
     if @event.save
@@ -33,6 +33,11 @@ class EventsController < ApplicationController
 
   def update
     @event = current_user.created_events.find(params[:id])
+    tag_list = params[:event][:tag_names].split(",")
+    # 空白文字の配列を取り除く https://qiita.com/ta1kt0me@github/items/33c4d37a65b69b75ee40
+    tag_list.reject(&:blank?)
+    # binding.pry
+    @event.tags_save(tag_list)
     if @event.update(event_params)
       redirect_to @event, notice: "更新しました"
     end

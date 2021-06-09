@@ -23,7 +23,7 @@
       = f.rich_text_area :content
     .form-group
       = f.label :tag_names
-      = f.text_field :tag_names, placeholder:",で区切ってください"
+      = f.text_field :tag_names, placeholder:",で区切ってください", class: "form-control"
     .form-group
       = f.label :image
       = f.file_field :image, class: "form-control-file"
