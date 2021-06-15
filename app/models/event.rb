@@ -1,4 +1,7 @@
 class Event < ApplicationRecord
+  # kuromoji を利用する設定
+  searchkick language: "japanese"
+
   has_rich_text :content
   has_one_attached :image, dependent: false  #ActiveStorage の image 属性が使えるように
   has_many :tickets, dependent: :destroy
@@ -17,6 +20,17 @@ class Event < ApplicationRecord
   validates :end_at, presence: true
   validate :start_at_should_be_before_end_at
 
+
+  def search_data
+    {
+      name: name,
+      place: place,
+      content: content,
+      owner_name: owner&.name,
+      start_at: start_at
+    }
+  end
+  
   def created_by?(user)
     return false unless user
     owner_id == user.id
