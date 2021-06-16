@@ -68,3 +68,5 @@ gem 'active_storage_validations', '~> 0.8.8'
 gem 'pry-rails'
 
 gem 'kaminari', '~> 1.2.0'
+
+gem 'banken'

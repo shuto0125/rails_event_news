@@ -60,6 +60,8 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    banken (1.0.3)
+      activesupport (>= 3.0.0)
     bindex (0.8.1)
     bootsnap (1.7.5)
       msgpack (~> 1.0)
@@ -287,6 +289,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_storage_validations (~> 0.8.8)
+  banken
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)

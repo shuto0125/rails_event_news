@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  include Banken
+  protect_from_forgery
+
   before_action :authenticate
   helper_method :logged_in?, :current_user
   private
