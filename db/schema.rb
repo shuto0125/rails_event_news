@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_08_094439) do
+ActiveRecord::Schema.define(version: 2021_06_15_103200) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 2021_06_08_094439) do
     t.string "image_url", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "role", default: 3
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
   end
 
