@@ -11,6 +11,7 @@ class EventsController < ApplicationController
   end
 
   def create
+    authorize! @event
     # create_events.build を使いたいが、userとtagの結びつけ方が不明のため一旦スルー
     # @event = current_user.created_events.build(event_params)
 
